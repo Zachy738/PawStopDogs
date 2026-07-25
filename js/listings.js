@@ -1,27 +1,29 @@
+// PawStop Listings + Message Seller Button
+
 async function loadListings(){
 
     const container = document.getElementById("listingsContainer");
 
+    if(!container) return;
 
-    const { data, error } = await supabaseClient
+
+    const { data: listings, error } = await supabaseClient
         .from("listings")
-        .select("*");
+        .select("*")
+        .order("created_at", { ascending:false });
+
 
 
     if(error){
 
-        console.log("Supabase Error:", error);
+        console.log(error);
 
         container.innerHTML =
-        "Error loading listings";
+        "Error loading listings.";
 
         return;
 
     }
-
-
-
-    console.log(data);
 
 
 
@@ -29,59 +31,70 @@ async function loadListings(){
 
 
 
-    if(data.length === 0){
+    listings.forEach(listing => {
 
-        container.innerHTML =
-        "No listings yet";
 
-        return;
+        const card = document.createElement("div");
 
-    }
+        card.className = "listing-card";
 
 
 
-    data.forEach(listing => {
+        card.innerHTML = `
+
+        <h2>
+        🐶 ${listing.business_name}
+        </h2>
 
 
-        container.innerHTML += `
-
-        <div class="listing-card">
-
-
-            <h2>
-            🐶 ${listing.business_name}
-            </h2>
+        <p>
+        ${listing.description || "No description"}
+        </p>
 
 
-            <p>
-            Service: ${listing.service}
-            </p>
+        <p>
+        📍 ${listing.location}
+        </p>
 
 
-            <p>
-            📍 ${listing.location}
-            </p>
+        <p>
+        💵 $${listing.price}
+        </p>
 
 
-            <p>
-            💵 $${listing.price}
-            </p>
 
+        <button 
+        class="message-button"
+        onclick="messageSeller('${listing.id}')">
 
-            <p>
-            ${listing.description || ""}
-            </p>
+        💬 Message Seller
 
+        </button>
 
-        </div>
 
         `;
+
+
+
+        container.appendChild(card);
 
 
     });
 
 
 }
+
+
+
+
+function messageSeller(listingId){
+
+    window.location.href =
+    "messages.html?listing=" + listingId;
+
+}
+
+
 
 
 
