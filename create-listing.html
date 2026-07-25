@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Listing | PawStop</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+🐾 PawStop
+</div>
+
+
+<nav>
+
+<a href="index.html">Home</a>
+<a href="listings.html">Listings</a>
+<a href="map.html">Find Nearby</a>
+
+</nav>
+
+</header>
+
+
+
+
+<section class="provider-form-page">
+
+
+<h1>
+Create Your Dog Service
+</h1>
+
+
+
+<form id="providerForm">
+
+
+<label>
+Business Name
+</label>
+
+<input 
+id="providerName"
+placeholder="Example: Happy Paws Grooming"
+required>
+
+
+
+<label>
+Service Type
+</label>
+
+<select id="serviceType">
+
+<option>Dog Grooming</option>
+<option>Dog Walking</option>
+<option>Dog Training</option>
+<option>Pet Sitting</option>
+
+</select>
+
+
+
+<label>
+Service Location
+</label>
+
+<input
+id="location"
+placeholder="Charlotte, NC"
+required>
+
+
+
+<button 
+type="button"
+id="getLocation"
+class="btn">
+
+📍 Use My Current Location
+
+</button>
+
+
+
+<input 
+type="hidden"
+id="latitude">
+
+
+
+<input 
+type="hidden"
+id="longitude">
+
+
+
+
+
+<label>
+About Your Service
+</label>
+
+<textarea
+id="description"
+placeholder="Tell customers about your service">
+</textarea>
+
+
+
+
+<label>
+Starting Price
+</label>
+
+<input
+id="price"
+placeholder="35"
+required>
+
+
+
+
+<label>
+Rating
+</label>
+
+<select id="rating">
+
+<option value="5">
+5.0
+</option>
+
+<option value="4.9">
+4.9
+</option>
+
+<option value="4.8">
+4.8
+</option>
+
+
+</select>
+
+
+
+
+<button class="btn">
+
+Create Listing
+
+</button>
+
+
+
+</form>
+
+
+</section>
+
+
+
+
+<script src="js/location.js"></script>
+
+<script src="js/create.js"></script>
+
+<script src="js/global.js"></script>
+
+<script src="js/map.js"></script>
+
+<script src="js/effects.js"></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>PawStop Admin Setup</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<section class="provider-form-page">
+
+
+<h1>
+Create First Admin
+</h1>
+
+
+<form id="adminSetup">
+
+
+<label>
+Email
+</label>
+
+<input id="adminEmail" type="email">
+
+
+<label>
+Admin Setup Code
+</label>
+
+<input id="adminCode" type="password">
+
+
+<button class="btn">
+Create Admin
+</button>
+
+
+</form>
+
+
+</section>
+
+
+
+<script>
+
+
+document
+.getElementById("adminSetup")
+.addEventListener("submit",function(e){
+
+
+e.preventDefault();
+
+
+
+let code =
+document.getElementById("adminCode").value;
+
+
+
+// CHANGE THIS CODE TO YOUR OWN SECRET
+
+if(code !== "PAWSTOPOWNER2026"){
+
+alert("Wrong setup code");
+
+return;
+
+}
+
+
+
+let admin = {
+
+email:
+document.getElementById("adminEmail").value,
+
+admin:true
+
+};
+
+
+
+localStorage.setItem(
+"admin",
+JSON.stringify(admin)
+);
+
+
+
+alert("You are now the PawStop owner!");
+
+window.location="admin.html";
+
+
+});
+
+
+</script>
+
+
+
+</body>
+
+</html>

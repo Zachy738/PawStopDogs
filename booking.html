@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PawStop Booking</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">🐾 PawStop</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="booking.html">Booking</a>
+<a href="reviews.html">Reviews</a>
+<a href="gallery.html">Gallery</a>
+<a href="messages.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<section class="page">
+
+
+<h1>Book Your Dog Grooming</h1>
+
+
+<form id="bookingForm">
+
+
+<input id="owner" placeholder="Your Name" required>
+
+<input id="dog" placeholder="Dog Name" required>
+
+<input id="breed" placeholder="Dog Breed" required>
+
+
+
+<select id="service">
+
+<option>Bath & Brush - $35</option>
+<option>Full Groom - $70</option>
+<option>Nail Trim - $15</option>
+<option>Puppy Groom - $45</option>
+
+</select>
+
+
+
+<input type="date" id="date" required>
+
+
+<input type="time" id="time" required>
+
+
+<button class="btn">
+Confirm Booking
+</button>
+
+
+</form>
+
+
+<h2 id="confirmation"></h2>
+
+
+</section>
+
+
+
+<script src="js/booking.js"></script>
+
+<script src="js/map.js"></script>
+
+<script src="js/global.js"></script>
+
+<script src="js/effects.js"></script>
+
+
+</body>
+</html>

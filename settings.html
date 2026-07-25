@@ -1,0 +1,83 @@
+let settings = JSON.parse(
+    localStorage.getItem("settings")
+) || {
+    dark: false,
+    sounds: true,
+    animations: true
+};
+
+
+const dark = document.getElementById("darkMode");
+const sounds = document.getElementById("sounds");
+const animations = document.getElementById("animations");
+
+
+
+dark.checked = settings.dark;
+sounds.checked = settings.sounds;
+animations.checked = settings.animations;
+
+
+
+function saveSettings(){
+
+    localStorage.setItem(
+        "settings",
+        JSON.stringify(settings)
+    );
+
+}
+
+
+
+dark.onchange = function(){
+
+    settings.dark = dark.checked;
+
+    saveSettings();
+
+    location.reload();
+
+};
+
+
+
+sounds.onchange = function(){
+
+    settings.sounds = sounds.checked;
+
+    saveSettings();
+
+};
+
+
+
+animations.onchange = function(){
+
+    settings.animations = animations.checked;
+
+    saveSettings();
+
+    location.reload();
+
+};
+
+
+
+document
+.getElementById("resetData")
+.onclick = function(){
+
+
+    if(confirm("Reset all PawStop data?")){
+
+
+        localStorage.clear();
+
+        location.reload();
+
+
+    }
+
+
+};
