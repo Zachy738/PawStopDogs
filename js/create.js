@@ -1,93 +1,65 @@
-const form =
-document.getElementById("providerForm");
+const form = document.getElementById("providerForm");
+
+
+form.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+
+    const listing = {
+
+        business_name:
+        document.getElementById("providerName").value,
+
+        service:
+        document.getElementById("serviceType").value,
+
+        description:
+        document.getElementById("description").value,
+
+        price:
+        document.getElementById("price").value,
+
+        location:
+        document.getElementById("location").value,
+
+        latitude:
+        document.getElementById("latitude").value,
+
+        longitude:
+        document.getElementById("longitude").value
+
+    };
 
 
 
-form.addEventListener(
-"submit",
-function(e){
-
-
-e.preventDefault();
-
-
-
-let providers =
-JSON.parse(
-localStorage.getItem("providers")
-) || [];
+    const { data, error } =
+    await supabaseClient
+    .from("listings")
+    .insert([listing]);
 
 
 
+    if(error){
 
-let provider = {
+        console.log(error);
 
+        alert(
+        "Error creating listing"
+        );
 
-id: Date.now(),
+        return;
 
-
-name:
-document.getElementById("providerName").value,
-
-
-service:
-document.getElementById("serviceType").value,
+    }
 
 
-location:
-document.getElementById("location").value,
+    alert(
+    "Listing created successfully!"
+    );
 
 
-latitude:
-document.getElementById("latitude").value,
-
-
-longitude:
-document.getElementById("longitude").value,
-
-
-description:
-document.getElementById("description").value,
-
-
-price:
-document.getElementById("price").value,
-
-
-rating:
-document.getElementById("rating").value
-
-
-
-};
-
-
-
-
-providers.push(provider);
-
-
-
-localStorage.setItem(
-
-"providers",
-
-JSON.stringify(providers)
-
-);
-
-
-
-
-alert(
-"Listing created!"
-);
-
-
-
-window.location =
-"map.html";
-
+    window.location =
+    "listings.html";
 
 
 });

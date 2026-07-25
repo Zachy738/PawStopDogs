@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>PawStop Profile</title>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PawStop Listings</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -19,30 +23,82 @@
 🐾 PawStop
 </div>
 
+
+<button class="menu-button" onclick="toggleMenu()">
+☰
+</button>
+
+
+<nav id="mobileNav">
+
+<a href="index.html">
+🏠 Home
+</a>
+
+<a href="listings.html">
+🐶 Find Listings
+</a>
+
+<a href="create-listing.html">
+➕ Become Provider
+</a>
+
+<a href="map.html">
+🗺️ Map
+</a>
+
+<a href="messages.html">
+💬 Messages
+</a>
+
+<a href="settings.html">
+⚙️ Settings
+</a>
+
+
+</nav>
+
+
+<div id="userArea"></div>
+
+
 </header>
 
 
 
-<section class="profile-page">
+
+<section class="listings-page">
 
 
-<div id="profile">
+<h1>
+🐶 Find Dog Groomers
+</h1>
+
+
+
+<div id="listingsContainer">
+
+Loading listings...
 
 </div>
+
 
 
 </section>
 
 
 
-<script src="js/profile.js"></script>
 
-<script src="js/global.js"></script>
 
-<script src="js/map.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="js/effects.js"></script>
+<script src="js/supabase.js"></script>
 
+<script src="js/user.js"></script>
+
+<script src="js/listings.js"></script>
+
+<script src="js/menu.js"></script>
 
 
 </body>

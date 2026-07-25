@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PawStop Premium</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+🐾 PawStop
+</div>
+
+
+<nav>
+
+<a href="index.html">Home</a>
+<a href="listings.html">Listings</a>
+<a href="create-listing.html">Become Provider</a>
+<a href="premium.html">Premium</a>
+<a href="messages.html">Messages</a>
+
+</nav>
+
+
+<div id="userArea"></div>
+
+
+</header>
+
+
+
+
+<section class="premium-page">
+
+
+<h1>
+🚀 Grow Your PawStop Business
+</h1>
+
+
+<p>
+Get your grooming service seen by more customers.
+</p>
+
+
+
+
+<div class="premium-cards">
+
+
+
+<div class="premium-card">
+
+
+<h2>
+⭐ Listing Boost
+</h2>
+
+
+<h3>
+$10 / month
+</h3>
+
+
+<ul>
+
+<li>Push your listing higher</li>
+
+<li>More customer views</li>
+
+<li>Better search placement</li>
+
+<li>Boost badge</li>
+
+</ul>
+
+
+<button class="btn" onclick="choosePlan('Boost')">
+
+Choose Boost
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="premium-card premium">
+
+
+<h2>
+👑 Premium Provider
+</h2>
+
+
+<h3>
+$50 / month
+</h3>
+
+
+<ul>
+
+<li>Top search placement</li>
+
+<li>Premium badge</li>
+
+<li>Featured listing</li>
+
+<li>Maximum exposure</li>
+
+</ul>
+
+
+<button class="btn" onclick="choosePlan('Premium')">
+
+Go Premium
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<script>
+
+function choosePlan(plan){
+
+alert(
+"You selected the " + plan + " plan! Payment setup coming soon."
+);
+
+}
+
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
+<script src="js/user.js"></script>
+
+
+</body>
+
+</html>
