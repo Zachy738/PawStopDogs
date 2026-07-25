@@ -1,99 +1,157 @@
-// PawStop Account Display System
+// PawStop User System + Admin Button
 
-async function loadUser() {
+
+const ADMIN_EMAIL = "zlrm587@gmail.com";
+
+
+
+async function loadUser(){
+
 
     const userArea = document.getElementById("userArea");
 
-    // Stop if the page doesn't have the user area
-    if (!userArea) {
-        return;
-    }
+
+    if(!userArea) return;
+
 
 
     const { data, error } = await supabaseClient.auth.getUser();
 
 
-    if (error) {
+
+    if(error){
 
         console.log(error);
 
     }
 
 
+
     const user = data.user;
 
 
 
-    // User is logged in
-    if (user) {
+    // USER IS LOGGED IN
+
+    if(user){
+
 
 
         const username =
         user.user_metadata?.username || "PawStop User";
 
 
+
+        let adminButton = "";
+
+
+
+        // ONLY SHOW ADMIN BUTTON FOR ADMIN
+
+        if(user.email === ADMIN_EMAIL){
+
+
+            adminButton = `
+
+            <a href="admin.html" class="admin-button">
+
+                👑 Admin Panel
+
+            </a>
+
+            `;
+
+
+        }
+
+
+
+
+
         userArea.innerHTML = `
 
-            <div class="account-box">
 
-                <span class="username">
-                    🐾 ${username}
-                </span>
+        <div class="account-box">
 
 
-                <button 
-                class="logout-button"
-                onclick="logout()">
+            <span class="username">
 
-                    🚪 Logout
+                🐾 ${username}
 
-                </button>
+            </span>
 
-            </div>
+
+
+            ${adminButton}
+
+
+
+            <button 
+            class="logout-button"
+            onclick="logout()">
+
+
+                🚪 Logout
+
+
+            </button>
+
+
+
+        </div>
+
 
         `;
 
 
-    } 
-    
-    // User is not logged in
+
+    }
+
+
+
+    // USER IS LOGGED OUT
+
     else {
+
 
 
         userArea.innerHTML = `
 
-            <div class="account-box">
+
+        <div class="account-box">
 
 
-                <a href="login.html" class="login-button">
+            <a href="login.html">
 
-                    🔐 Login
+                🔐 Login
 
-                </a>
-
-
-                <a href="signup.html" class="signup-button">
-
-                    📝 Signup
-
-                </a>
+            </a>
 
 
-            </div>
+
+            <a href="signup.html">
+
+                📝 Signup
+
+            </a>
+
+
+        </div>
+
 
         `;
 
 
     }
 
+
 }
 
 
 
 
-// Logout function
 
-async function logout() {
+async function logout(){
 
 
     const { error } =
@@ -101,11 +159,13 @@ async function logout() {
 
 
 
-    if (error) {
+    if(error){
+
 
         alert(error.message);
 
         return;
+
 
     }
 
@@ -119,7 +179,5 @@ async function logout() {
 
 
 
-
-// Run when page loads
 
 loadUser();

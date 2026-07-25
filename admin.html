@@ -3,7 +3,7 @@
 
 <head>
 
-<title>PawStop Admin</title>
+<title>PawStop Admin Dashboard</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -23,75 +23,124 @@
 
 
 
+
 <section class="admin-page">
 
 
 <h1>
-Admin Dashboard
+👑 Admin Dashboard
 </h1>
 
 
+
+<div class="stats">
+
+
 <div class="admin-card">
 
-<h2>
-Users
+<h2 id="userCount">
+0
 </h2>
+
+<p>
+Users
+</p>
+
+</div>
+
+
+
+<div class="admin-card">
+
+<h2 id="listingCount">
+0
+</h2>
+
+<p>
+Listings
+</p>
+
+</div>
+
+
+
+
+<div class="admin-card">
+
+<h2 id="messageCount">
+0
+</h2>
+
+<p>
+Messages
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<h2>
+🔍 Search
+</h2>
+
+
+<input 
+id="searchBox"
+placeholder="Search users or listings..."
+onkeyup="searchAll()">
+
+
+
+
+
+<h2>
+👥 Users
+</h2>
+
 
 <div id="users">
 
-Loading...
+Loading users...
 
 </div>
 
-</div>
 
 
 
-<div class="admin-card">
 
 <h2>
-Listings
+🐶 Listings
 </h2>
+
 
 <div id="listings">
 
-Loading...
+Loading listings...
 
 </div>
 
-</div>
 
 
 
-<div class="admin-card">
+
 
 <h2>
-Messages
+🚨 Reports
 </h2>
 
-<div id="messages">
 
-Loading...
+<div id="reports">
 
-</div>
-
-</div>
-
-
-
-<div class="admin-card">
-
-<h2>
-Admin Requests
-</h2>
-
-<div id="requests">
-
-Loading...
+No reports yet.
 
 </div>
 
-</div>
 
 
 
@@ -100,13 +149,13 @@ Loading...
 
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
 <script src="js/admin.js"></script>
 
-
-
-<script src="js/map.js"></script>
-
-<script src="js/effects.js"></script>
 
 </body>
 

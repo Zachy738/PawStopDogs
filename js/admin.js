@@ -1,144 +1,347 @@
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
+const ADMIN_EMAIL = "zlrm587@gmail.com";
 
 
-let providers =
-JSON.parse(localStorage.getItem("providers")) || [];
-
-
-let adminRequests =
-JSON.parse(localStorage.getItem("adminRequests")) || [];
-
-
-
-document.getElementById("users").innerHTML =
-users.length ?
-
-users.map(user=>`
-
-<p>
-👤 ${user.name}
-<br>
-📧 ${user.email}
-</p>
-
-`).join("")
-
-
-:
-
-"No users";
+let allUsers = [];
+let allListings = [];
 
 
 
 
-
-document.getElementById("listings").innerHTML =
-providers.length ?
-
-providers.map(provider=>`
-
-<p>
-
-🐶 ${provider.name}
-
-<br>
-
-${provider.service}
-
-<br>
-
-📍 ${provider.location}
-
-</p>
-
-`).join("")
+async function checkAdmin(){
 
 
-:
-
-"No listings";
+const {data,error} =
+await supabaseClient.auth.getUser();
 
 
 
+if(error || !data.user){
+
+window.location.href="login.html";
+
+return;
+
+}
 
 
 
-let allMessages = [];
+if(data.user.email !== ADMIN_EMAIL){
 
-Object.keys(localStorage)
+alert("No admin access");
 
-.forEach(key=>{
+window.location.href="index.html";
+
+return;
+
+}
 
 
-if(key.startsWith("chat_")){
 
-
-allMessages.push(
-
-JSON.parse(
-localStorage.getItem(key)
-)
-
-);
+loadDashboard();
 
 
 }
+
+
+
+
+
+async function loadDashboard(){
+
+
+loadUsers();
+
+loadListings();
+
+loadMessages();
+
+
+}
+
+
+
+
+
+async function loadUsers(){
+
+
+const {data,error} =
+await supabaseClient
+.from("profiles")
+.select("*");
+
+
+
+if(error){
+
+console.log(error);
+
+return;
+
+}
+
+
+
+allUsers=data;
+
+
+
+document.getElementById("userCount").innerText =
+data.length;
+
+
+
+displayUsers(data);
+
+
+
+}
+
+
+
+
+
+function displayUsers(users){
+
+
+const box =
+document.getElementById("users");
+
+
+box.innerHTML="";
+
+
+
+users.forEach(user=>{
+
+
+box.innerHTML += `
+
+<div class="admin-card">
+
+
+<h3>
+👤 ${user.username || "User"}
+</h3>
+
+
+<p>
+${user.email || ""}
+</p>
+
+
+</div>
+
+`;
+
 
 
 });
 
 
-
-document.getElementById("messages").innerHTML =
-
-allMessages.length ?
-
-JSON.stringify(allMessages,null,2)
-
-:
-
-"No messages";
+}
 
 
 
 
 
-document.getElementById("requests").innerHTML =
-
-adminRequests.length ?
-
-adminRequests.map(request=>`
-
-<p>
-
-${request.email}
-
-<button onclick="approve('${request.email}')">
-
-Approve
-
-</button>
-
-</p>
-
-`).join("")
 
 
-:
+async function loadListings(){
 
-"No requests";
+
+const {data,error} =
+await supabaseClient
+.from("listings")
+.select("*");
 
 
 
+if(error){
+
+console.log(error);
+
+return;
+
+}
 
 
-function approve(email){
+
+allListings=data;
 
 
-alert(
-email+" approved as admin"
-);
+
+document.getElementById("listingCount").innerText =
+data.length;
+
+
+
+displayListings(data);
+
 
 
 }
+
+
+
+
+
+
+
+function displayListings(listings){
+
+
+const box =
+document.getElementById("listings");
+
+
+box.innerHTML="";
+
+
+
+listings.forEach(item=>{
+
+
+box.innerHTML += `
+
+<div class="admin-card">
+
+
+<h3>
+🐶 ${item.business_name}
+</h3>
+
+
+<p>
+📍 ${item.location}
+</p>
+
+
+
+<button onclick="deleteListing('${item.id}')">
+
+🗑 Delete
+
+</button>
+
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+async function deleteListing(id){
+
+
+if(!confirm("Delete this listing?")) return;
+
+
+
+await supabaseClient
+.from("listings")
+.delete()
+.eq("id",id);
+
+
+
+alert("Deleted");
+
+
+loadListings();
+
+
+}
+
+
+
+
+
+
+
+
+async function loadMessages(){
+
+
+const {data,error} =
+await supabaseClient
+.from("messages")
+.select("*");
+
+
+
+if(!error){
+
+
+document.getElementById("messageCount").innerText =
+data.length;
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+function searchAll(){
+
+
+let text =
+document.getElementById("searchBox")
+.value
+.toLowerCase();
+
+
+
+let users =
+allUsers.filter(user=>
+
+JSON.stringify(user)
+.toLowerCase()
+.includes(text)
+
+);
+
+
+
+let listings =
+allListings.filter(item=>
+
+JSON.stringify(item)
+.toLowerCase()
+.includes(text)
+
+);
+
+
+
+displayUsers(users);
+
+displayListings(listings);
+
+
+
+}
+
+
+
+
+
+checkAdmin();
